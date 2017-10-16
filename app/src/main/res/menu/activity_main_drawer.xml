@@ -14,10 +14,6 @@
             android:id="@+id/nav_level3"
             android:icon="@drawable/ic_menu_slideshow"
             android:title="Level 3" />
-        <item
-            android:id="@+id/nav_level4"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="Level 4" />
     </group>
 
 </menu>

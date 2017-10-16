@@ -18,7 +18,8 @@ public class Main extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     String level1[] = {"dictionary", "indicatory"};
-    String level2[] = {"rescued", "reduced", "secured", "seducer"};
+    String level2[] = {"saltier", "realist", "retails"};
+    String level3[] = {"rescued", "reduced", "secured", "seducer"};
 
     private void setupLevel(final String[] levelText) {
         final TextView anagramText = (TextView) findViewById(R.id.anagramText);
@@ -122,14 +123,11 @@ public class Main extends AppCompatActivity
         TextView placeholderText = (TextView) findViewById(R.id.anagramText);
 
         if (id == R.id.nav_level1) {
-            //placeholderText.setText("Screen for Level 1");
             setupLevel(level1);
         } else if (id == R.id.nav_level2) {
             setupLevel(level2);
         } else if (id == R.id.nav_level3) {
-            placeholderText.setText("Screen for Level 3");
-        } else if (id == R.id.nav_level4) {
-            placeholderText.setText("Screen for Level 4");
+            setupLevel(level3);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
