@@ -7,16 +7,58 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.EditText;
 import android.widget.TextView;
 
 public class Main extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     String level1[] = {"dictionary", "indicatory"};
+    String level2[] = {"rescued", "reduced", "secured", "seducer"};
 
-    private void setupLevel(String[] levelText) {
+    private void setupLevel(final String[] levelText) {
+        final TextView anagramText = (TextView) findViewById(R.id.anagramText);
+        final TextView answersText = (TextView) findViewById(R.id.answersText);
+        final EditText textEdit = (EditText) findViewById(R.id.textInput);
+        final int[] answers = {0};
+
+        anagramText.setText(levelText[0]);
+        answersText.setText("");
+
+        textEdit.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                return;
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                return;
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                for(int i = 1; i < levelText.length; i++) {
+                    if(s.toString().equals(levelText[i])) {
+                        if(answersText.getText().length() == 0) {
+                            answersText.setText(levelText[i]);
+                            answers[0]++;
+                        } else {
+                            answersText.setText(answersText.getText() + ", " + levelText[i]);
+                            answers[0]++;
+                        }
+                        if(answers[0] == levelText.length - 1) {
+                            anagramText.setText("Congratulations!");
+                            answersText.setText("Youve found all the anagrams for this level!");
+                        }
+                    }
+                }
+            }
+        });
 
     }
 
@@ -27,8 +69,8 @@ public class Main extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        TextView placeholderText = (TextView) findViewById(R.id.displayText);
-        placeholderText.setText("Welcome to the Anagram game! Swipe right for a level menu.\nhello world");
+        TextView placeholderText = (TextView) findViewById(R.id.anagramText);
+        placeholderText.setText("Welcome to the Anagram game! Swipe right for a level menu.");
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -77,12 +119,13 @@ public class Main extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-        TextView placeholderText = (TextView) findViewById(R.id.displayText);
+        TextView placeholderText = (TextView) findViewById(R.id.anagramText);
 
         if (id == R.id.nav_level1) {
-            placeholderText.setText("Screen for Level 1");
+            //placeholderText.setText("Screen for Level 1");
+            setupLevel(level1);
         } else if (id == R.id.nav_level2) {
-            placeholderText.setText("Screen for Level 2");
+            setupLevel(level2);
         } else if (id == R.id.nav_level3) {
             placeholderText.setText("Screen for Level 3");
         } else if (id == R.id.nav_level4) {
