@@ -17,18 +17,22 @@ import android.widget.TextView;
 public class Main extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    // String array for each level
+    // The first element in the array is the original anagram
+    // All other elements are possible answers
     String level1[] = {"dictionary", "indicatory"};
     String level2[] = {"saltier", "realist", "retails"};
     String level3[] = {"rescued", "reduced", "secured", "seducer"};
 
+    // Setup a level
     private void setupLevel(final String[] levelText) {
         final TextView anagramText = (TextView) findViewById(R.id.anagramText);
         final TextView answersText = (TextView) findViewById(R.id.answersText);
         final EditText textEdit = (EditText) findViewById(R.id.textInput);
         final int[] answers = {0};
 
-        anagramText.setText(levelText[0]);
-        answersText.setText("");
+        anagramText.setText(levelText[0]);  // Set the anagramText field to the anagram
+        answersText.setText("");            // Reset the answersText field
 
         textEdit.addTextChangedListener(new TextWatcher() {
             @Override
@@ -45,6 +49,7 @@ public class Main extends AppCompatActivity
             public void afterTextChanged(Editable s) {
                 for(int i = 1; i < levelText.length; i++) {
                     if(s.toString().equals(levelText[i])) {
+                        // If an anagram has been found, add it to the list
                         if(answersText.getText().length() == 0) {
                             answersText.setText(levelText[i]);
                             answers[0]++;
@@ -52,6 +57,7 @@ public class Main extends AppCompatActivity
                             answersText.setText(answersText.getText() + ", " + levelText[i]);
                             answers[0]++;
                         }
+                        // If all anagram answers have been found, complete the level
                         if(answers[0] == levelText.length - 1) {
                             anagramText.setText("Congratulations!");
                             answersText.setText("Youve found all the anagrams for this level!");
@@ -120,13 +126,12 @@ public class Main extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-        TextView placeholderText = (TextView) findViewById(R.id.anagramText);
 
-        if (id == R.id.nav_level1) {
+        if (id == R.id.nav_level1) {         // Setup level 1
             setupLevel(level1);
-        } else if (id == R.id.nav_level2) {
+        } else if (id == R.id.nav_level2) {  // Setup level 2
             setupLevel(level2);
-        } else if (id == R.id.nav_level3) {
+        } else if (id == R.id.nav_level3) {  // Setup level 3
             setupLevel(level3);
         }
 
