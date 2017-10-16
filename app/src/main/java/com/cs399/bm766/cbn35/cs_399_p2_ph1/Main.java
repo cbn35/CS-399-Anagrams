@@ -14,6 +14,12 @@ import android.widget.TextView;
 public class Main extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    String level1[] = {"dictionary", "indicatory"};
+
+    private void setupLevel(String[] levelText) {
+
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,8 +27,8 @@ public class Main extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        TextView placeholderText = (TextView) findViewById(R.id.placeholderText);
-        placeholderText.setText("Main menu. Will contain simple select screen and author information");
+        TextView placeholderText = (TextView) findViewById(R.id.displayText);
+        placeholderText.setText("Welcome to the Anagram game! Swipe right for a level menu.\nhello world");
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -71,7 +77,7 @@ public class Main extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-        TextView placeholderText = (TextView) findViewById(R.id.placeholderText);
+        TextView placeholderText = (TextView) findViewById(R.id.displayText);
 
         if (id == R.id.nav_level1) {
             placeholderText.setText("Screen for Level 1");
