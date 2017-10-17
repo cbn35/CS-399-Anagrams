@@ -53,9 +53,10 @@ public class Main extends AppCompatActivity
                         if(answersText.getText().length() == 0) {
                             answersText.setText(levelText[i]);
                             answers[0]++;
-                        } else {
-                            answersText.setText(answersText.getText() + ", " + levelText[i]);
-                            answers[0]++;
+                        } else if(answersText.getText().toString().contains(textEdit.getText()
+                        )) {
+                                answersText.setText(answersText.getText() + ", " + levelText[i]);
+                                answers[0]++;
                         }
                         // If all anagram answers have been found, complete the level
                         if(answers[0] == levelText.length - 1) {
